@@ -29,6 +29,18 @@ public class LectureConfig {
         Slide s1_3 = new Slide("3", "lecture1/img3.jpg");
         l1.addSlide(s1_3);
 
+        Slide s1_4 = new Slide("4", "lecture1/img4.jpg");
+        l1.addSlide(s1_4);
+
+        Slide s1_5 = new Slide("5", "lecture1/img5.jpg");
+        l1.addSlide(s1_5);
+
+        Slide s1_6 = new Slide("6", "lecture1/img6.jpg");
+        l1.addSlide(s1_6);
+
+        Slide s1_7 = new Slide("7", "lecture1/img7.jpg");
+        l1.addSlide(s1_7);
+        
         lectureRepository.save(l1);
 
         Lecture l2 = new Lecture(2L, "Wykład 2", "Java OOP, import, klasy, pola, metody, obiekty.");
