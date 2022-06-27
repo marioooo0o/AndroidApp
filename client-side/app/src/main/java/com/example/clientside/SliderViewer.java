@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -32,8 +33,9 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
     private int current_image_index;
     private List<Slide> slides;
     private List<Bitmap> images;
-    private String[] names = {"Laravel", "Spring Boot", "Django", ".Net Core", "Symfony"};
-    private boolean isAuthorize = false;
+    private List<String> names = new ArrayList<>();
+    //private String[] names = {"Laravel", "Spring Boot", "Django", ".Net Core", "Symfony"};
+    public static boolean isAuthorize = false;
     private Lecture lecture;
     /*
      *
@@ -68,6 +70,7 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
                         byte[] byteArray = slide.getImage().getBytes();
                         byte[] bytes = Base64.decode(slide.getImage(),Base64.DEFAULT);
                         slide.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+                        names.add(slide.getTitle());
                     }
                      Toast.makeText(SliderViewer.this, "Respo: " + lecture, Toast.LENGTH_LONG).show();
                     DisplayImage();
@@ -96,8 +99,8 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
         btn_right = (Button)findViewById(R.id.btn_right);
         btn_last = (Button)findViewById(R.id.btn_last);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.images_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, names);
+                //ArrayAdapter.createFromResource(this, android.R.layout.simple_spinner_item, names);
 // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
@@ -119,8 +122,10 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
             @Override
             public void onClick(View v) {
                 current_image_index++;
+                Toast.makeText(SliderViewer.this, "Index: " + current_image_index, Toast.LENGTH_LONG).show();
                 if(current_image_index == 5 && !isAuthorize){
                     createNewPopUPDialog();
+                    current_image_index = 4;
                 }
                 else{
                     current_image_index = current_image_index % slides.size();
@@ -136,7 +141,11 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
             public void onClick(View v) {
                 current_image_index--;
                 if(current_image_index < 0){
-                    current_image_index = slides.size()-1;
+                    if(!isAuthorize){
+                        current_image_index = 5;
+                    }else{
+                        current_image_index = slides.size()-1;
+                    }
                 }
                 spinner.setSelection(current_image_index);
                 iv_display.setImageBitmap(slides.get(current_image_index).getImageBitmap());
@@ -147,7 +156,12 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
         btn_last.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                current_image_index = slides.size()-1;
+                if(!isAuthorize){
+                    current_image_index = 5;
+
+                }else{
+                    current_image_index = slides.size()-1;
+                }
                 spinner.setSelection(current_image_index);
                 iv_display.setImageBitmap(slides.get(current_image_index).getImageBitmap());
                 //iv_display.setImageBitmap(Bitmap.createScaledBitmap(slides.get(current_image_index).getImageBitmap(), iv_display.getWidth(), iv_display.getHeight(), false));
@@ -181,6 +195,7 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
             public void onClick(View v) {
                 Intent intent = new Intent(SliderViewer.this, Login.class);
                 startActivity(intent);
+                dialog.hide();
             }
         });
     }
