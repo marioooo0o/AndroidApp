@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Mariusz/Desktop/Semestr 6/Java/JavaPRO/client-side/app/src/main/res/layout/activity_choose_lecture.xml" value="0.213768115942029" />
+        <entry key="..\:/Users/Mariusz/Desktop/Semestr 6/Java/JavaPRO/client-side/app/src/main/res/layout/activity_login.xml" value="0.213768115942029" />
+        <entry key="..\:/Users/Mariusz/Desktop/Semestr 6/Java/JavaPRO/client-side/app/src/main/res/layout/activity_main.xml" value="0.213768115942029" />
+        <entry key="..\:/Users/Mariusz/Desktop/Semestr 6/Java/JavaPRO/client-side/app/src/main/res/layout/activity_slider_viewer.xml" value="0.213768115942029" />
+        <entry key="..\:/Users/Mariusz/Desktop/Semestr 6/Java/JavaPRO/client-side/app/src/main/res/layout/fragment_lecture_with_desc.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/Mariusz/Desktop/Semestr 6/Java/JavaPRO/client-side/app/src/main/res/layout/lecture_row.xml" value="0.2" />
+        <entry key="..\:/Users/Mariusz/Desktop/Semestr 6/Java/JavaPRO/client-side/app/src/main/res/layout/popup.xml" value="0.213768115942029" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
