@@ -72,7 +72,6 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
                         slide.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
                         names.add(slide.getTitle());
                     }
-                     Toast.makeText(SliderViewer.this, "Respo: " + lecture, Toast.LENGTH_LONG).show();
                     DisplayImage();
                     SwitchButton();
 
@@ -113,8 +112,6 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
                 current_image_index = 0;
                 spinner.setSelection(current_image_index);
                 iv_display.setImageBitmap(slides.get(current_image_index).getImageBitmap());
-                //iv_display.setImageBitmap(Bitmap.createScaledBitmap(slides.get(current_image_index).getImageBitmap(), iv_display.getWidth(), iv_display.getHeight(), false));
-                //iv_display.setImageResource(slides.get(current_image_index).getImageBitmap());
             }
         });
 
@@ -122,7 +119,6 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
             @Override
             public void onClick(View v) {
                 current_image_index++;
-                Toast.makeText(SliderViewer.this, "Index: " + current_image_index, Toast.LENGTH_LONG).show();
                 if(current_image_index == 5 && !isAuthorize){
                     createNewPopUPDialog();
                     current_image_index = 4;
@@ -173,8 +169,6 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         current_image_index = position;
         iv_display.setImageBitmap(Bitmap.createScaledBitmap(slides.get(current_image_index).getImageBitmap(), iv_display.getWidth(), iv_display.getHeight(), false));
-        //String text = parent.getItemAtPosition(position).toString();
-        //Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
     }
 
     @Override

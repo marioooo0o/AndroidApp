@@ -11,10 +11,14 @@ public class MainConfig {
     @Autowired
     LectureConfig lectureConfig;
 
+    @Autowired
+    JavaToolsConfig javaToolsConfig;
+
     @Bean
     CommandLineRunner commandLineRunner() {
         return args -> {
             lectureConfig.seed();
+            javaToolsConfig.seed();
         };
     }
 }

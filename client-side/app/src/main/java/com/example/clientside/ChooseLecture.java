@@ -48,7 +48,7 @@ public class ChooseLecture extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Lecture>> call, Response<List<Lecture>> response) {
                 lectures = response.body();
-                Toast.makeText(ChooseLecture.this, "Respo: " + lectures, Toast.LENGTH_LONG).show();
+                Toast.makeText(ChooseLecture.this, "Success!", Toast.LENGTH_LONG).show();
                 lectureListAdapter.setLectureList(lectures);
             }
 
@@ -57,8 +57,6 @@ public class ChooseLecture extends AppCompatActivity {
                 Toast.makeText(ChooseLecture.this, "ERROR: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
-
     }
 
     private void setAdapter() {
@@ -68,18 +66,4 @@ public class ChooseLecture extends AppCompatActivity {
         recyclerView.setAdapter(lectureListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-//    public void showDescLecture1(View view) {
-//        lecture1_desc = (TextView) findViewById(R.id.lecture1_desc);
-//        btn_show_lecture1 = (Button) findViewById(R.id.btn_show_lecture1);
-//        String text = "Platformy Java, SE, EE, ME, JVM. JDK. Język Java, moduły, pakiety.";
-//        switchText(text, lecture1_desc, btn_show_lecture1);
-//        btn_show_lecture1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(ChooseLecture.this, SliderViewer.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//    }
 }

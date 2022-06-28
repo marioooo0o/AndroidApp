@@ -37,7 +37,7 @@ public class LectureListAdapter extends RecyclerView.Adapter<LectureListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull LectureViewHolder holder, int position) {
-                Lecture lecture = lectureList.get(position);
+        Lecture lecture = lectureList.get(position);
         holder.lectureTitle.setText(lecture.getName());
         holder.lectureDesc.setText(lecture.getDescription());
         holder.id = lecture.getId();

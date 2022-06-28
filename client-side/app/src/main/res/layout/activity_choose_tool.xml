@@ -4,26 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChooseLecture">
+    tools:context=".ChooseTool">
 
     <TextView
-        android:id="@+id/btn_lecture1"
+        android:id="@+id/choose_tool_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Wybierz wykład:"
         android:textAlignment="center"
         android:textSize="30sp"
         tools:ignore="MissingConstraints" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_lecture1"
-        tools:listitem="@layout/lecture_row" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tool_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginHorizontal="10dp"
+            android:scrollbarStyle="insideOverlay"
+            tools:listitem="@layout/tool_row" />
 
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

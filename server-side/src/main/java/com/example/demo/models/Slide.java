@@ -29,10 +29,7 @@ public class Slide {
     private Lecture lecture;
 
     public Slide(String title, String fileDir) throws IOException {
-        //this.id = id;
         this.title = title;
         this.image = Objects.requireNonNull(this.getClass().getClassLoader().getResourceAsStream("static/lectures/" + fileDir)).readAllBytes();
-        //this.image = Base64.getDecoder.decode(Objects.requireNonNull(this.getClass().getClassLoader().getResourceAsStream("static/lectures/" + fileDir)).readAllBytes());
-        //this.lecture = lecture;
     }
 }
