@@ -40,6 +40,9 @@ public class LectureConfig {
 
         Slide s1_7 = new Slide("7", "lecture1/img7.jpg");
         l1.addSlide(s1_7);
+
+        //Slide s1_8 = new Slide("8", "lecture1/img8.jpg");
+        //l1.addSlide(s1_8);
         
         lectureRepository.save(l1);
 

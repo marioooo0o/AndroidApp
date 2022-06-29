@@ -42,7 +42,7 @@ public class ChooseLecture extends AppCompatActivity {
         setAdapter();
         textView47 = (TextView) findViewById(R.id.btn_lecture1);
         String url = "http://localhost:8080/lectures";
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://10.0.2.2:8080/").addConverterFactory(JacksonConverterFactory.create(Mapper.get())).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.103:8080/").addConverterFactory(JacksonConverterFactory.create(Mapper.get())).build();
         LectureApi lectureApi = retrofit.create(LectureApi.class);
         lectureApi.listLecture().enqueue(new Callback<List<Lecture>>() {
             @Override

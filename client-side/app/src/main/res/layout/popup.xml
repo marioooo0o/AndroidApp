@@ -31,7 +31,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:text="Wykorzystałeś limit slajdów. Aby przeglądać dalej musisz sie zalogować!"
-            android:textSize="25dp" />
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/btn_login"

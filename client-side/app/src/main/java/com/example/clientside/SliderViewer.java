@@ -32,9 +32,8 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
     private Button btn_first, btn_right, btn_left, btn_last;
     private int current_image_index;
     private List<Slide> slides;
-    private List<Bitmap> images;
     private List<String> names = new ArrayList<>();
-    //private String[] names = {"Laravel", "Spring Boot", "Django", ".Net Core", "Symfony"};
+    private List<String> namesShort= new ArrayList<>();
     public static boolean isAuthorize = false;
     private Lecture lecture;
     /*
@@ -58,7 +57,7 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
         Long id = getIntent().getLongExtra(LectureListAdapter.LECTURE_KEY, 0);
         if(id != 0) {
             //String url = "http://localhost:8080/lectures/"+id.toString();
-            Retrofit retrofit = new Retrofit.Builder().baseUrl("http://10.0.2.2:8080/").addConverterFactory(GsonConverterFactory.create()).build();
+            Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.103:8080/").addConverterFactory(GsonConverterFactory.create()).build();
             LectureApi lectureApi = retrofit.create(LectureApi.class);
             lectureApi.singleLecture(id).enqueue(new Callback<Lecture>() {
                 @Override
@@ -72,7 +71,9 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
                         slide.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
                         names.add(slide.getTitle());
                     }
+                    System.arraycopy(names, 0, namesShort, 0, 5);
                     DisplayImage();
+                    setShortArray();
                     SwitchButton();
 
                 }
@@ -86,6 +87,11 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
         }
     }
 
+    void setShortArray(){
+        for(int i = 0; i < 5; i++){
+            namesShort.add(names.get(i));
+        }
+    }
     void DisplayImage(){
         iv_display = (ImageView)findViewById(R.id.iv_display);
         current_image_index = 0;
@@ -98,11 +104,8 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
         btn_right = (Button)findViewById(R.id.btn_right);
         btn_last = (Button)findViewById(R.id.btn_last);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, names);
-                //ArrayAdapter.createFromResource(this, android.R.layout.simple_spinner_item, names);
-// Specify the layout to use when the list of choices appears
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, namesShort);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
@@ -119,7 +122,7 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
             @Override
             public void onClick(View v) {
                 current_image_index++;
-                if(current_image_index == 5 && !isAuthorize){
+                if(current_image_index == 5 && !isAuthorize) {
                     createNewPopUPDialog();
                     current_image_index = 4;
                 }
@@ -127,9 +130,12 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
                     current_image_index = current_image_index % slides.size();
                     spinner.setSelection(current_image_index);
                     iv_display.setImageBitmap(slides.get(current_image_index).getImageBitmap());
-                    //iv_display.setImageBitmap(Bitmap.createScaledBitmap(slides.get(current_image_index).getImageBitmap(), iv_display.getWidth(), iv_display.getHeight(), false));
                 }
-
+                if(isAuthorize){
+                    adapter.clear();
+                    adapter.addAll(names);
+                    adapter.notifyDataSetChanged();
+                }
             }
         });
         btn_left.setOnClickListener(new View.OnClickListener() {
@@ -145,7 +151,6 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
                 }
                 spinner.setSelection(current_image_index);
                 iv_display.setImageBitmap(slides.get(current_image_index).getImageBitmap());
-                //iv_display.setImageBitmap(Bitmap.createScaledBitmap(slides.get(current_image_index).getImageBitmap(), iv_display.getWidth(), iv_display.getHeight(), false));
             }
         });
 
@@ -160,8 +165,7 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
                 }
                 spinner.setSelection(current_image_index);
                 iv_display.setImageBitmap(slides.get(current_image_index).getImageBitmap());
-                //iv_display.setImageBitmap(Bitmap.createScaledBitmap(slides.get(current_image_index).getImageBitmap(), iv_display.getWidth(), iv_display.getHeight(), false));
-            }
+                }
         });
     }
 

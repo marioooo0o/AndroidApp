@@ -30,7 +30,7 @@ public class ChooseCategory extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.choose_category_text_view);
         String url = "http://localhost:8080/categories";
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://10.0.2.2:8080/").addConverterFactory(JacksonConverterFactory.create(Mapper.get())).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.103:8080/").addConverterFactory(JacksonConverterFactory.create(Mapper.get())).build();
         CategoryApi categoryApi = retrofit.create(CategoryApi.class);
         categoryApi.listCategories().enqueue(new Callback<List<Category>>() {
             @Override
