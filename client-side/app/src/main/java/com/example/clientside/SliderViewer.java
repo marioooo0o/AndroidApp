@@ -32,8 +32,8 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
     private Button btn_first, btn_right, btn_left, btn_last;
     private int current_image_index;
     private List<Slide> slides;
-    private List<String> names = new ArrayList<>();
-    private List<String> namesShort= new ArrayList<>();
+    public List<String> names = new ArrayList<>();
+    public List<String> namesShort= new ArrayList<>();
     public static boolean isAuthorize = false;
     private Lecture lecture;
     /*
@@ -57,7 +57,7 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
         Long id = getIntent().getLongExtra(LectureListAdapter.LECTURE_KEY, 0);
         if(id != 0) {
             //String url = "http://localhost:8080/lectures/"+id.toString();
-            Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.103:8080/").addConverterFactory(GsonConverterFactory.create()).build();
+            Retrofit retrofit = new Retrofit.Builder().baseUrl("http://kni.prz.edu.pl:8080/").addConverterFactory(GsonConverterFactory.create()).build();
             LectureApi lectureApi = retrofit.create(LectureApi.class);
             lectureApi.singleLecture(id).enqueue(new Callback<Lecture>() {
                 @Override
@@ -71,7 +71,6 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
                         slide.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
                         names.add(slide.getTitle());
                     }
-                    System.arraycopy(names, 0, namesShort, 0, 5);
                     DisplayImage();
                     setShortArray();
                     SwitchButton();
@@ -114,6 +113,11 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
             public void onClick(View v) {
                 current_image_index = 0;
                 spinner.setSelection(current_image_index);
+                if(isAuthorize){
+                    adapter.clear();
+                    adapter.addAll(names);
+                    adapter.notifyDataSetChanged();
+                }
                 iv_display.setImageBitmap(slides.get(current_image_index).getImageBitmap());
             }
         });
@@ -149,6 +153,11 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
                         current_image_index = slides.size()-1;
                     }
                 }
+                if(isAuthorize){
+                    adapter.clear();
+                    adapter.addAll(names);
+                    adapter.notifyDataSetChanged();
+                }
                 spinner.setSelection(current_image_index);
                 iv_display.setImageBitmap(slides.get(current_image_index).getImageBitmap());
             }
@@ -162,6 +171,11 @@ public class SliderViewer extends Activity implements AdapterView.OnItemSelected
 
                 }else{
                     current_image_index = slides.size()-1;
+                }
+                if(isAuthorize){
+                    adapter.clear();
+                    adapter.addAll(names);
+                    adapter.notifyDataSetChanged();
                 }
                 spinner.setSelection(current_image_index);
                 iv_display.setImageBitmap(slides.get(current_image_index).getImageBitmap());

@@ -33,7 +33,7 @@ public class ChooseTool extends AppCompatActivity {
     private void getCategoryDetails(){
         Long id = getIntent().getLongExtra(CategoryListAdapter.CATEGORY_KEY, 0);
         if(id != 0){
-            Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.103:8080/").addConverterFactory(GsonConverterFactory.create()).build();
+            Retrofit retrofit = new Retrofit.Builder().baseUrl("http://kni.prz.edu.pl:8080/").addConverterFactory(GsonConverterFactory.create()).build();
             CategoryApi categoryApi = retrofit.create(CategoryApi.class);
             categoryApi.singleCategory(id).enqueue(new Callback<Category>() {
                 @Override
